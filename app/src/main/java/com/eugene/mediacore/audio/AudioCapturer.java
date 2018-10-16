@@ -51,8 +51,8 @@ public class AudioCapturer {
 
     private WavFileWriter wavFileWriter;
 
-    private static final String PATH = Environment.getExternalStorageDirectory().getPath()
-            + File.separator + "media" + File.separator;
+    public static final String PATH = Environment.getExternalStorageDirectory().getPath()
+            + File.separator;
 
     public void startRecord() {
         BUFFER_SIZE = AudioRecord.getMinBufferSize(DEFAULT_SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT);

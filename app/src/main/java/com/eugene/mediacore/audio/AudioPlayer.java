@@ -3,6 +3,7 @@ package com.eugene.mediacore.audio;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
+import android.service.autofill.IFillCallback;
 import android.util.Log;
 
 public class AudioPlayer {
@@ -14,7 +15,7 @@ public class AudioPlayer {
      */
     private static final int DEF_STREAM_TYPE = AudioManager.STREAM_MUSIC;
     private static final int DEF_SAMPLE_RATE = 44100;
-    private static final int DEF_CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO;
+    private static final int DEF_CHANNEL_CONFIG = AudioFormat.CHANNEL_OUT_MONO;
     private static final int DEF_AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
     /**
      * AudioTrack 提供了两种播放模式，一种是 static 方式，一种是 streaming 方式，
@@ -72,12 +73,12 @@ public class AudioPlayer {
     }
 
     public boolean play(byte[] audioData, int offset, int size) {
-        if (!isPlayerStarted){
+        if (!isPlayerStarted) {
             Log.e(TAG, "Player not started !");
             return false;
         }
 
-        if (audioTrack.write(audioData,offset,size)!=size){
+        if (audioTrack.write(audioData, offset, size) != size) {
             Log.e(TAG, "Could not write all the samples to the audio device !");
         }
 
