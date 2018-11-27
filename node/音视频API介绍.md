@@ -1,4 +1,4 @@
-**Android SDK提供了两套音频采集API**
+#### 1、Android SDK提供了两套音频采集API
  
 - MediaRecorder：可以直接把手机麦克风录入的音频数据进行编码压缩（如AMR、MP3等）并存成文件，需要设置编码器。并且录制的音频文件可以用系统自带的Music播放器播放。MediaRecorder 底层也是调用了 AudioRecord 与 Android Framework 层的 AudioFlinger 进行交互的。  
  
@@ -17,7 +17,7 @@
    
    - audioFormat：这个参数是用来配置“数据位宽”的，可选的值也是以常量的形式定义在 AudioFormat 类中，常用的是 ENCODING_PCM_16BIT（16bit），ENCODING_PCM_8BIT（8bit），注意，前者是可以保证兼容所有Android手机的。
    
-   - bufferSizeInBytes：它配置的是 AudioRecord 内部的音频缓冲区的大小，该缓冲区的值不能低于一帧“音频帧”（Frame）的大小，而前一篇文章介绍过，一帧音频帧的大小计算如下：
+   - bufferSizeInBytes：它配置的是 AudioRecord 内部的音频缓冲区的大小，该缓冲区的值不能低于一帧“音频帧”（Frame）的大小，一帧音频帧的大小计算如下：
    
    ``` 
    int size = 采样率 x 位宽 x 采样时间 x 通道数 
@@ -33,16 +33,36 @@
 
 **如果想简单地做一个录音机，录制成音频文件，则推荐使用 MediaRecorder，而如果需要对音频做进一步的算法处理、或者采用第三方的编码库进行压缩、以及网络传输等应用，则建议使用 AudioRecord，直播中实时采集音频自然是要用AudioRecord了。**
   
-**Android SDK 提供了3套音频播放的API**
+
+#### 2、Android SDK 提供了3套音频播放的API
  
    - SoundPool：SoundPool 则适合播放比较短的音频片段，比如游戏声音、按键声、铃声片段等等，它可以同时播放多个音频。
  
    由于SoundPool对载入声音文件大小有所限制，这就导致了如果SoundPool没有载入完成，而不能安全调用play方法。好在Android SDK提供了一个SoundPool.OnLoadCompleteListener类来帮助我们了解声音文件是否载入完成。
     
-   - MediaPlayer：而 AudioTrack 则更接近底层，提供了非常强大的控制能力，支持低延迟播放，适合流媒体和VoIP语音电话等场景。
+   - MediaPlayer：更加适合在后台长时间播放本地音乐文件或者在线的流式资源。
  
-   - AudioTrack：使用AudioTrack播放的音频必须是解码后的PCM数据。
+   - AudioTrack：更接近底层，提供了非常强大的控制能力，支持低延迟播放，适合流媒体和VoIP语音电话等场景。使用AudioTrack播放的音频必须是解码后的PCM数据。
  
+ ```
+ public AudioTrack(AudioAttributes attributes, AudioFormat format, int bufferSizeInBytes,
+            int mode, int sessionId)
+ ```
+   - attributes：这个参数代表着当前应用使用的哪一种音频管理策略，当系统有多个进程需要播放音频时，这个管理策略会决定最终的展现效果：
+   
+   CONTENT_TYPE_MUSIC：音乐声
+   CONTENT_TYPE_SONIFICATION：提示音
+   
+   - format：这个参数是用来配置“数据位宽”的，可选的值也是以常量的形式定义在 AudioFormat 类中，常用的是 ENCODING_PCM_16BIT（16bit），ENCODING_PCM_8BIT（8bit），注意，前者是可以保证兼容所有Android手机的。
+   
+   - bufferSizeInBytes：它配置的是 AudioRecord 内部的音频缓冲区的大小，该缓冲区的值不能低于一帧“音频帧”（Frame）的大小。
+   
+   - mode：AudioTrack有两种数据加载模式（MODE_STREAM和MODE_STATIC），对应的是数据加载模式和音频流类型， 对应着两种完全不同的使用场景。
+   
+   MODE_STATIC：需要一次性将所有的数据都写入播放缓冲区，简单高效，通常用于播放铃声、系统提醒的音频片段。
+   
+   MODE_STREAM：每次都需要把数据从用户提供的Buffer中拷贝到AudioTrack内部的Buffer中，这在一定程度上会使引入延时。
+
    - MediaExtractor：对容器文件进行读取控制，将音频和视频的数据进行分离，内部方法均为native方法。
   
    - MediaCodec：对数据进行编解码，负责媒体文件的编码和解码工作，内部方法均为native方法。
