@@ -1,8 +1,8 @@
 **Android SDK提供了两套音频采集API**
  
-- MediaRecorder：可以直接把手机麦克风录入的音频数据进行编码压缩（如AMR、MP3等）并存成文件，需要设置编码器。并且录制的音频文件可以用系统自带的Music播放器播放。在用MediaRecorder进行录制音视频时，最终还是会创建AudioRecord用来与AudioFlinger进行交互。  
+- MediaRecorder：可以直接把手机麦克风录入的音频数据进行编码压缩（如AMR、MP3等）并存成文件，需要设置编码器。并且录制的音频文件可以用系统自带的Music播放器播放。MediaRecorder 底层也是调用了 AudioRecord 与 Android Framework 层的 AudioFlinger 进行交互的。  
  
-- AudioRecord：录制的是PCM格式的音频文件，需要用AudioTrack来播放，AudioTrack更接近底层。
+- AudioRecord：后者则更接近底层，录制的是一帧一帧PCM格式的音频文件，需要用AudioTrack来播放，AudioTrack更接近底层。
   
     ```
     public AudioRecord(int audioSource, int sampleRateInHz, int channelConfig, int audioFormat,
@@ -29,7 +29,7 @@
    int getMinBufferSize(int sampleRateInHz, int channelConfig, int audioFormat);
    ```
    
-  **分别是：MediaRecorder 和 AudioRecord，前者是一个更加上层一点的API，它可以直接把手机麦克风录入的音频数据进行编码压缩（如AMR、MP3等）并存成文件，而后者则更接近底层，能够更加自由灵活地控制，可以得到原始的一帧帧PCM音频数据。如果想简单地做一个录音机，录制成音频文件，则推荐使用 MediaRecorder，而如果需要对音频做进一步的算法处理、或者采用第三方的编码库进行压缩、以及网络传输等应用，则建议使用 AudioRecord，其实 MediaRecorder 底层也是调用了 AudioRecord 与 Android Framework 层的 AudioFlinger 进行交互的。直播中实时采集音频自然是要用AudioRecord了。**
+  **如果想简单地做一个录音机，录制成音频文件，则推荐使用 MediaRecorder，而如果需要对音频做进一步的算法处理、或者采用第三方的编码库进行压缩、以及网络传输等应用，则建议使用 AudioRecord，直播中实时采集音频自然是要用AudioRecord了。**
   
 **Android SDK 提供了3套音频播放的API**
  
