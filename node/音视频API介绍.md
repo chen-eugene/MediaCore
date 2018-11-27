@@ -28,8 +28,8 @@
    ```
    int getMinBufferSize(int sampleRateInHz, int channelConfig, int audioFormat);
    ```
-   
-  **如果想简单地做一个录音机，录制成音频文件，则推荐使用 MediaRecorder，而如果需要对音频做进一步的算法处理、或者采用第三方的编码库进行压缩、以及网络传输等应用，则建议使用 AudioRecord，直播中实时采集音频自然是要用AudioRecord了。**
+
+**如果想简单地做一个录音机，录制成音频文件，则推荐使用 MediaRecorder，而如果需要对音频做进一步的算法处理、或者采用第三方的编码库进行压缩、以及网络传输等应用，则建议使用 AudioRecord，直播中实时采集音频自然是要用AudioRecord了。**
   
 **Android SDK 提供了3套音频播放的API**
  
