@@ -3,11 +3,11 @@ package com.eugene.mediacore.audio;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
-import android.service.autofill.IFillCallback;
 import android.util.Log;
 
-public class AudioPlayer {
-    private static final String TAG = "AudioPlayer";
+@Deprecated
+public class AudioPlayerDeprecated {
+    private static final String TAG = "AudioPlayerDeprecated";
 
     /**
      * 这个参数代表着当前应用使用的哪一种音频管理策略，当系统有多个进程需要播放音频时，

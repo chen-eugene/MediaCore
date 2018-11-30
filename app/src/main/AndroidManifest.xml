@@ -3,7 +3,7 @@
     package="com.eugene.mediacore">
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.eugene.mediademo.audio.AudioActivity" />
+        <activity android:name=".video.VideoActivity"/>
     </application>
 
 </manifest>
