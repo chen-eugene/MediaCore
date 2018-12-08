@@ -33,6 +33,7 @@ class VideoActivity : AppCompatActivity() {
         backSize?.forEach {
             sb.append("${it.width} × ${it.height}").append("、")
         }
+
         sb.append("\n").append("前置摄像头：")
         frontSize?.forEach {
             sb.append("${it.width} × ${it.height}").append("、")
