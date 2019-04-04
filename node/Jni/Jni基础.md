@@ -2,6 +2,7 @@
 
   - 静态注册：native函数的命名规则：Java_类全路径_方法名。
   - 动态注册：JNI 允许我们提供一个函数映射表，注册给 JVM，这样 JVM 就可以用函数映射表来调用相应的函数，而不必通过函数名来查找相关函数(这个查找效率很低，函数名超级长)。
+  
     - 利用结构体JNINativeMethod保存Java Native函数和JNI函数的对应关系；
     - 在一个JNINativeMethod数组中保存所有native函数和JNI函数的对应关系；
     - 在Java中通过System.loadLibrary加载完JNI动态库之后，调用JNI_OnLoad函数，开始动态注册；
