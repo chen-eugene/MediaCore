@@ -63,7 +63,7 @@
   | byte | B | double | D |
   | char | C | void | V |
   | short | S | object | L如：Ljava/lang/String |
-  | int | I | Array | [签名 如：[I |
+  | int | I | Array | [签名] 如：[I] |
   | long | L | Method | (参数签名)返回值类型签名 |
 <br>
 
