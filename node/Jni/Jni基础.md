@@ -56,7 +56,7 @@
     jmethodId methodId_prop = env -> GetMethodId(hello_clazz,"function","(ILjava/util/Date;[I)I");
   }
   ```
-  &nbsp;&nbsp;签名对照表：      
+  &nbsp;&nbsp;签名对照表：可以使用javap命令查看签名，如：javap -s -p JNIDemo.class      
   
   | Java类型      |     相应的签名    | Java类型      |     相应的签名    |
   | :-------- | :--------| :--------| :--------|
@@ -64,7 +64,7 @@
   | byte | B | double | D |
   | char | C | void | V |
   | short | S | object | L如：Ljava/lang/String |
-  | int | I | Array | [签名] 如：[I] |
+  | int | I | Array | [签名  如：[I |
   | long | L | Method | (参数签名)返回值类型签名 |
 <br>
 
