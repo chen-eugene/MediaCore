@@ -27,6 +27,46 @@
 | Object | __jobject* | jobject |  
 <br>
 
+#### 3、native中调用Java层代码。
+
+  JNI在jni.h头文件中定义了jfieldId、jmethodId类型来分别代表Java端的属性和方法。在访问或者设置属性的时候，首先需要在native代码中取得代表Java属性的jfieldId，然后才能在本地代码中进行Java属性的操作。同样的，需要先取得代表该方法的jmethodId才能进行Java方法调用。
+  
+  - GetFieldId/GetStaticFieldId(jclass clazz,char* name,const char* sign)
+    - clazz：方法依赖的类对象的class对象
+    - name：字段的名字
+    - sign：字段的签名
+
+  - GetMethodId/GetStaticMethodId(jclass clazz,char* name,const char* sign)
+  
+  ```
+  public class Hello{
+    public int property;
+    
+    public int function(int foo,Date date,int[] arr){
+    }
+    
+    public native void test();
+  }
+  
+  JNIEXPORT void Java_Hello_test(JNIEnv* env,jobject obj){
+    //因为test不是静态方法，所以传进来的就是调用这个函数的对象
+    //否则就传入一个jclass对象表示native方法所在的类
+    jclass hello_clazz = env -> GetObjectClass(obj);
+    jfieldId fieldId_prop = env -> GetFieldId(hello_clazz,"property","I");
+    jmethodId methodId_prop = env -> GetMethodId(hello_clazz,"function","(ILjava/util/Date;[I)I");
+  }
+  ```
+  &nbsp;&nbsp;签名对照表：
+  | Java类型      |     相应的签名    | Java类型      |     相应的签名    |
+  | :-------- | :--------| :--------| :--------|
+  | boolean | Z | float | F |
+  | byte | B | double | D |
+  | char | C | void | V |
+  | short | S | object | L如：Ljava/lang/String |
+  | int | I | Array | [签名 如：[I |
+  | long | L | Method | (参数签名)返回值类型签名 |
+<br>
+
 #### [1、native方法的静态注册和动态注册。](https://blog.csdn.net/XSF50717/article/details/54693802)
 
   - 静态注册：native函数的命名规则：Java_类全路径_方法名。
