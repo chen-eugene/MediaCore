@@ -3,7 +3,8 @@
   - **JNIEnv**：代表Java环境，通过**JNIEnv*** 指针可以操作Java端代码。
   
   - **jobject**：如果native方法不是static，就代表native方法的类实例；如果native方法是static，那么就代表native方法的类的class对象实例。
-  
+<br>
+
 #### 2、Java类型和native类型的映射关系。
 
 | Java类型      |     native类型    |   JNI定义的别名  |
@@ -16,9 +17,8 @@
 | short | short | jshort |
 | float | float | jfloat |
 | double | double | jdouble |
-| Object | _jobject* | jobject |  
-
-
+| Object | __jobject* | jobject |  
+<br>
 
 #### [1、native方法的静态注册和动态注册。](https://blog.csdn.net/XSF50717/article/details/54693802)
 
