@@ -6,6 +6,10 @@
   
   - **jclass**：为了能够在C/C++中使用Java类，jni.h头文件专门定义了jclass类型来表示Java中的Class类。JNIEnv中有如下几个函数可以获取到jclass：
     - jclas FindClass(const char* clsName)：通过类的名称（类的全名，这时候包名不是用点号而是用/来区分的）来获取jclass：`如：jclass str = env -> FindClass(java/lang/String);`
+    
+    - jclass GetObjectClass(jobject obj)：通过对象实例来获取jclass，相当于Java中的getClass方法。
+    
+    - jclass GetSuperClass(jclass obj)：通过jclass可以获取其父类的jclass对象。
 <br>
 
 #### 2、Java类型和native类型的映射关系。
