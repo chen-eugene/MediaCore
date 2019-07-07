@@ -3,6 +3,8 @@
   - **JNIEnv**：代表Java环境，通过**JNIEnv*** 指针可以操作Java端代码。
   
   - **jobject**：如果native方法不是static，就代表native方法的类实例；如果native方法是static，那么就代表native方法的类的class对象实例。
+  
+  - **jclass**：为了能够在C/C++中使用Java类，jni.h
 <br>
 
 #### 2、Java类型和native类型的映射关系。
