@@ -4,8 +4,19 @@
   
   - **jobject**：如果native方法不是static，就代表native方法的类实例；如果native方法是static，那么就代表native方法的类的class对象实例。
   
-  
-  
+#### 2、Java类型和native类型的映射关系。
+
+| Java类型      |     native类型    |   JNI定义的别名  |
+| :-------- | :--------| :------ |
+| int | long |  jint/jsize |
+| long | __int64 | jlong |
+| byte | signed char | jbyte |
+| boolean | unsigned char | jboolean |
+| char | unsigned short | jchar |
+| short | short | jshort |
+| float | float | jfloat |
+| double | double | jdouble |
+| Object | _jobject* | jobject |  
 
 
 
