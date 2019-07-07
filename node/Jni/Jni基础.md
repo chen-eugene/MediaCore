@@ -4,7 +4,8 @@
   
   - **jobject**：如果native方法不是static，就代表native方法的类实例；如果native方法是static，那么就代表native方法的类的class对象实例。
   
-  - **jclass**：为了能够在C/C++中使用Java类，jni.h
+  - **jclass**：为了能够在C/C++中使用Java类，jni.h头文件专门定义了jclass类型来表示Java中的Class类。JNIEnv中有如下几个函数可以获取到jclass：
+    - jclas FindClass(const char* clsName)：通过类的名称（类的全名，这时候包名不是用点号而是用/来区分的）来获取jclass：`如：jclass str = env -> FindClass(java/lang/String);`
 <br>
 
 #### 2、Java类型和native类型的映射关系。
