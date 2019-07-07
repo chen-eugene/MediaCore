@@ -56,7 +56,8 @@
     jmethodId methodId_prop = env -> GetMethodId(hello_clazz,"function","(ILjava/util/Date;[I)I");
   }
   ```
-  &nbsp;&nbsp;签名对照表：
+  &nbsp;&nbsp;签名对照表：      
+  
   | Java类型      |     相应的签名    | Java类型      |     相应的签名    |
   | :-------- | :--------| :--------| :--------|
   | boolean | Z | float | F |
